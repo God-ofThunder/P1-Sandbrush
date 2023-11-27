@@ -56,16 +56,16 @@ void shapTurn(){
 
 void followWall(int *readings, int minDistanse){	
 	printProxSensorReadings(readings);
-	if (readings[1] >= minDistanse){ 
-		motor.setSpeeds(70,60);// lav hastighed giver mindre overslag i ønsket distance (proportionel regulering)
+	if (readings[1] <= minDistanse){ 
+		motor.setSpeeds(80,60);// lav hastighed giver mindre overslag i ønsket distance (proportionel regulering)
 	}
-	else if (readings[1] < minDistanse){ 
-		motor.setSpeeds(60,70);
+	else if (readings[1] > minDistanse){ 
+		motor.setSpeeds(60,80);
 	}
 }
 
-void followEdge(int *readings, int minDistanse){
-	if (readings[1] >= 50 && readings[0] >= 50){
+void followEdgeOfSandbox(int *readings, int minDistanse){
+	if (readings[1] >= 100 && readings[0] >= 100){
 		shapTurn();
 	}
 	else{
@@ -84,11 +84,11 @@ void setup() {
 	waitForStartSignal(proxSensorReadings);
 
 	readProxSensors(proxSensorReadings);
-	int minDistanse = proxSensorReadings[1];
+	const int minDistanse = proxSensorReadings[1];
 	
 	while(true){
 		readProxSensors(proxSensorReadings);
-		followEdge(proxSensorReadings, minDistanse);
+		followEdgeOfSandbox(proxSensorReadings, minDistanse);
 	}
 	motor.setSpeeds(0,0);
 }
