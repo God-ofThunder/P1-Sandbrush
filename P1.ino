@@ -45,28 +45,28 @@ void printProxSensorReadings(int *readings){
 	display.print(readings[1]);
 }
 
-void shapTurn(){
+void sharpTurn(){
     motor.setSpeeds(0,0);
     motor.setSpeeds(-60,-60);
-    delay(200);
+    delay(300);
     motor.setSpeeds(-100,100);
-    delay(900);
+    delay(830);
     motor.setSpeeds(60,60);
 }
 
 void followWall(int *readings, int minDistanse){	
 	printProxSensorReadings(readings);
-	if (readings[1] <= minDistanse){ 
+	if (readings[1] >= minDistanse){ 
 		motor.setSpeeds(80,60);// lav hastighed giver mindre overslag i ønsket distance (proportionel regulering)
 	}
-	else if (readings[1] > minDistanse){ 
+	else if (readings[1] < minDistanse){ 
 		motor.setSpeeds(60,80);
 	}
 }
 
 void followEdgeOfSandbox(int *readings, int minDistanse){
-	if (readings[1] >= 100 && readings[0] >= 100){
-		shapTurn();
+	if (readings[1] <= 0 && readings[0] >= 15){
+		sharpTurn();
 	}
 	else{
 		followWall(readings, minDistanse);
