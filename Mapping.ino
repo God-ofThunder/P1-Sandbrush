@@ -333,7 +333,6 @@ void Stop(){
   delay(2000);
   display.clear();
   display.print("Printing");
-  //Lave for loop der print arraysene ved hjælp af nummer på entry
   PrintArrays();
   while(buttonA.getSingleDebouncedRelease() == false){
   }
