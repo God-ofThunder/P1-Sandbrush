@@ -179,7 +179,7 @@ void Bip(){
   delay(100);
 }
 
-void VictoryScreech(){
+void VictoryTune(){
   motor.setSpeeds(0,0);
   buzzer.playNote(NOTE_D(5),20,15);
   delay(375);
@@ -322,7 +322,7 @@ void Turn(){
 
 void Stop(){
   motor.setSpeeds(0,0);
-  VictoryScreech();
+  VictoryTune();
   delay(50);
   display.clear();
   unsigned long SlutTid = millis() - StartTid;
